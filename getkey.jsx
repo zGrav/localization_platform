@@ -13,21 +13,26 @@ if (userLang === 'en') { //english
     loadLang = require('./english.json');
 }
 
-export function getKey(key) {
-    if (!extKey(loadLang, key)) {
-        if (userLang !== 'en') {
-            let loadLangtemp = require('./english.json');
-            if (!extKey(loadLangtemp, key)) {
-                return key + ' untranslated in ' + userLang + ' and en JSON';
-            } else {
-                return extKey(loadLangtemp, key);
-            }
-        } else if (userLang === 'en') {
-            return key + ' untranslated in ' + userLang + ' JSON';
-        }
-    } else {
-        return extKey(loadLang, key);
-    }
+
+function getTranslatedString(key, fallback, args, lang) {
+	lang = lang || Localization.getUserLang() || DefaultUserLang;
+
+	// try to get translated string
+	let lookup = extKey(getLangFile(lang), key);
+	if (!lookup && lang !== 'en') {
+		// try fallback to english
+		lookup = extKey(getLangFile('en'), key);
+	}
+
+	if (!lookup) {
+		return fallback || key + ' untranslated in ' + lang + ' and en JSON';
+	}
+
+	if (args && args.constructor === Array) {
+		lookup = vsprintf(lookup, args);
+	}
+
+	return lookup;
 }
 
 function extKey(obj, str) {
