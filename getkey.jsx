@@ -1,4 +1,5 @@
 'use strict';
+import { vsprintf } from 'sprintf-js';
 
 let userLang = navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage;
 
