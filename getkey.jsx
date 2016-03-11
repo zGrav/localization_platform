@@ -15,7 +15,7 @@ if (userLang === 'en') { //english
 
 
 function getTranslatedString(key, fallback, args, lang) {
-	lang = lang;
+	lang = lang || userLang;
 
 	// try to get translated string
 	let lookup = extKey(getLangFile(lang), key);
