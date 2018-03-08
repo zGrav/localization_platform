@@ -1,0 +1,10 @@
+{
+  "name": "localization_platform",
+  "version": "1.0.0",
+  "description": "A minimalistic way of getting translation keys from a JSON file",
+  "main": "getkey.jsx",
+  "repository": "https://github.com/zGrav/localization_platform",
+  "author": "David Silva <zgrav@null.net>",
+  "license": "BSD 2-clause",
+  "private": false
+}
